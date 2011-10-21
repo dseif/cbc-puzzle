@@ -53,6 +53,15 @@
       json: chosenJSON,
       ready: function() {
         document.getElementById( "loading-overlay" ).style.display = "none";
+        timerInterval = setInterval( function() {
+          var elapsedTime = ( Date.now() - startTime ) / 1000,
+          minutes = Math.floor( elapsedTime / 60 ),
+          seconds = Math.floor( elapsedTime - minutes * 60 ),
+          minutesString = minutes > 9 ? minutes : "0" + minutes,
+          secondsString = seconds > 9 ? seconds : "0" + seconds,
+          timeString = minutesString + ":" + secondsString;
+          timerDiv.innerHTML = timeString;
+        }, 1000 );
       },
       order: order
     });
@@ -74,17 +83,6 @@
         statusMessage.innerHTML = "Try again :(";
       }
     }, false );
-
-    timerInterval = setInterval( function() {
-      var elapsedTime = ( Date.now() - startTime ) / 1000,
-          minutes = Math.floor( elapsedTime / 60 ),
-          seconds = Math.floor( elapsedTime - minutes * 60 ),
-          minutesString = minutes > 9 ? minutes : "0" + minutes,
-          secondsString = seconds > 9 ? seconds : "0" + seconds,
-          timeString = minutesString + ":" + secondsString;
-      timerDiv.innerHTML = timeString;
-    }, 1000 );
-
   }, false );
 </script>
 </head>
