@@ -290,11 +290,21 @@
 
     }; //prepare
 
+    var createSource = function( src ) {
+
+      var sourceElement = document.createElement( "source" );
+      sourceElement.src = src;
+      audioElement.appendChild( sourceElement );
+    }
+
     if ( jsonBlob ) {
       jsonBlob = JSON.parse( jsonBlob );
-      var sourceElement = document.createElement( "source" );
-      sourceElement.src = jsonBlob.audio;
-      audioElement.appendChild( sourceElement );
+      audioArr = jsonBlob.audio;
+
+      for( var i = 0, len = audioArr.length; i < len; i++ ) {
+        createSource( audioArr[ i ] );
+      }
+
       audioElement.setAttribute( "preload", "auto" );
       audioElement.setAttribute( "autobuffer", "true" );
       document.body.appendChild( audioElement );
